@@ -1,3 +1,5 @@
+.ds_store
+
 # Logs
 logs
 *.log
@@ -129,4 +131,3 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-.ds_store
