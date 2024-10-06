@@ -30,8 +30,14 @@ class Truck extends Vehicle implements AbleToTow {
     towingCapacity: number
   ) {
     // Call the parent class constructor with required arguments
-    super(make, model, year, weight);
+    // make, model, year, weight --I took these arguments out because they
+    // weren't in the vehicle constructor
+    super();
 
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.weight = weight;
     this.vin = vin;
     this.color = color;
     this.topSpeed = topSpeed;
@@ -57,11 +63,11 @@ class Truck extends Vehicle implements AbleToTow {
   }
 
   // Override the printDetails method from the Vehicle
-  printDetails(): void {
+  override printDetails(): void {
     super.printDetails();
     console.log(`Towing Capacity: ${this.towingCapacity} lbs`);
     this.wheels.forEach((wheel, index) => {
-      console.log(`Wheel ${index + 1}: ${wheel.getDiameter()} inch with ${wheel.getTireBrand()} tire`);
+      console.log(`Wheel ${index + 1}: ${wheel.getDiameter} inch with ${wheel.getTireBrand} tire`);
     });
   }
   

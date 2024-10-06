@@ -260,7 +260,8 @@ class Cli {
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
           new Wheel(parseInt(answers.frontWheelDiameter), answers.frontWheelBrand),
-          new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand)
+          new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand),
+          []
         );
 
         // TODO: Use the answers object to pass the required properties to the Motorbike constructor

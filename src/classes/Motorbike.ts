@@ -5,29 +5,35 @@ import Wheel from './Wheel.js';
 // The Motorbike class extends the Vehicle class
 class Motorbike extends Vehicle {
   // Declare properties of the Motorbike class
+  vin: string;
+  color: string;
+  make: string;
+  model: string;
+  year: number;
+  weight: number;
+  topSpeed: number;
+  wheels: Wheel[];
   // Properties include vin, color, make, model, year, weight, topSpeed, and wheels
   constructor(
-    vin,
-    color,
-    make,
-    model,
-    year,
+    vin: string,
+    color: string,
+    make: string,
+    model: string,
+    year: number,
     weight: number,
     topSpeed: number,
     wheels: Wheel[] = []) {
     // Call the constructor of the parent class, Vehicle
-    super
-    (
-      make,
-      model,
-      year,
-      weight
-    );
+    super();
 
     // Initialize the properties of the Motorbike class
     this.vin = vin;
     this.color = color;
     this.topSpeed = topSpeed;
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.weight = weight;
 
     // Check if the wheels array has 2 elements; if not, create 2 default Wheel objects
     if (wheels.length !== 2) {
@@ -43,7 +49,7 @@ class Motorbike extends Vehicle {
   }
 
   // Override the printDetails method from the Vehicle class
-  printDetails() {
+  override printDetails() {
     // Call the printDetails method of the parent class
     super.printDetails();
 
