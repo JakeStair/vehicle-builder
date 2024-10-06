@@ -1,4 +1,6 @@
-.ds_store
+.DS_Store
+package-lock.json
+node_modules
 
 # Logs
 logs
