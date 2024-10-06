@@ -54,30 +54,29 @@ class Cli {
   }
 
   // method to create a vehicle
+  // TODO: add statements to create a truck or motorbike 
+  // if the user selects the respective vehicle type
   createVehicle(): void {
     inquirer
       .prompt([
-        {
+        { 
           type: 'list',
           name: 'vehicleType',
-          message: 'Select a vehicle type',
-          // TODO: Update the choices array to include Truck and Motorbike
-          choices: ['Car', 'Truck', 'Motorbike'],
+          message: 'Select vehicle type',
+          choices: ['Car', 'Truck', 'Motorbike'] 
         },
       ])
       .then((answers) => {
         if (answers.vehicleType === 'Car') {
-          // create a car
           this.createCar();
         } else if (answers.vehicleType === 'Truck') {
           this.createTruck();
         } else if (answers.vehicleType === 'Motorbike') {
           this.createMotorbike();
         }
-        // TODO: add statements to create a truck or motorbike 
-        // if the user selects the respective vehicle type
       });
   }
+
 
   // method to create a car
   createCar(): void {
@@ -256,13 +255,14 @@ class Cli {
           Cli.generateVin(),
           answers.color,
           answers.make,
-          answer.model,
-          pareInt(answer.year),
+          answers.model,
+          parseInt(answers.year),
           parseInt(answers.weight),
-          parseInt(answers.response),
+          parseInt(answers.topSpeed),
           new Wheel(parseInt(answers.frontWheelDiameter), answers.frontWheelBrand),
           new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand)
         );
+
         // TODO: Use the answers object to pass the required properties to the Motorbike constructor
         // TODO: push the motorbike to the vehicles array
         // TODO: set the selectedVehicleVin to the vin of the motorbike
