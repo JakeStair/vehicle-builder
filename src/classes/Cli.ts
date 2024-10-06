@@ -275,27 +275,33 @@ class Cli {
 
   // method to find a vehicle to tow
   // TODO: add a parameter to accept a truck object
-  findVehicleToTow(): void {
+  // TODO: check if the selected vehicle is the truck
+  // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
+  // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
+  findVehicleToTow(selectedTruck: Truck): void {
     inquirer
       .prompt([
         {
           type: 'list',
           name: 'vehicleToTow',
           message: 'Select a vehicle to tow',
-          choices: this.vehicles.map((vehicle) => {
-            return {
-              name: `${vehicle.vin} -- ${vehicle.make} ${vehicle.model}`,
-              value: vehicle,
-            };
-          }),
+          choices: this.vehicles.map((vehicle) => ({
+            name: `${vehicle.vin} -- ${vehicle.make} ${vehicle.model}`,
+            value: vehicle,
+          })),
         },
       ])
       .then((answers) => {
-        // TODO: check if the selected vehicle is the truck
-        // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
-        // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
+        const vehicleToTow = answers.vehicleToTow;
+        if (vehicleToTow === selectedTruck) {
+          console.log('A truck cannot tow itself. Please select another vehicle.');
+        } else {
+          selectedTruck.tow(vehicleToTow);
+        }
+        this.performActions();
       });
   }
+
 
   // method to perform actions on a vehicle
   performActions(): void {
@@ -330,7 +336,7 @@ class Cli {
             break; // Exit the loop once the vehicle is found
           }
         }
-  
+
         if (selectedVehicle) {
           // Perform the selected action based on user input
           if (answers.action === 'Print details') {
@@ -371,13 +377,13 @@ class Cli {
         } else {
           console.log('Selected vehicle not found.');
         }
-  
+
         if (!this.exit) {
           this.performActions();
         }
       });
   }
-  
+
 
   // method to start the cli
   startCli(): void {
