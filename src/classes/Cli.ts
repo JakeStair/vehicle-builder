@@ -366,7 +366,8 @@ class Cli {
             }
           } else if (answers.action === 'Perform wheelie') {
             if (selectedVehicle instanceof Motorbike) {
-              selectedVehicle.performWheelie();
+              selectedVehicle.wheelie();
+              // ⤴️the problem here was that the wheelie method was being called performWheelie, and was sending errors
             } else {
               console.log('Only motorbikes can perform a wheelie.');
             }
