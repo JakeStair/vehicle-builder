@@ -1,144 +1,114 @@
-# 09 Servers and APIs: Weather Dashboard
+# 08 TypeScript and OOP: Vehicle Builder
 
 ## Your Task
 
-External APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in their context, frequently consuming this data via a server.
+Your task is to update an existing TypeScript command-line application that builds and uses cars to have additional options for motorbikes and trucks. The application prompts the user to create a new vehicle or select an existing vehicle. After going through the creation process or the selection process, the user is able to perform certain actions with the selected vehicle. The user is returned to the actions menu after each action until they decide to exit the application.
 
-Your challenge is to build a weather dashboard application that calls the OpenWeather API and renders data in the browser.
+Because this application won't be deployed, you'll need to provide a link to a walkthrough video that demonstrates its functionality. You'll need to submit a link to the video **and** add it to the README of your project.
 
-The application’s front end has already been created. It's your job to build the back end, connect the two, and then deploy the entire application to Render.
+Refer to the [video submission guide on the Full-Stack Blog](https://coding-boot-camp.github.io/full-stack/computer-literacy/video-submission-guide) for additional guidance on creating a video.
 
-* Use the [5-day weather forecast API](https://openweathermap.org/forecast5) to retrieve weather data for cities.
-
-* The base URL should look like the following:
-
-  ```url
-  https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-  ```
-
-* After registering for a new API key, you may need to wait up to 2 hours for that API key to activate.
-
-* For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
-
-## User Story
+### User Story
 
 ```md
-AS A traveler
-
-I WANT to see the weather outlook for multiple cities
-
-SO THAT I can plan a trip accordingly
+AS a developer
+I WANT to update an existing application to include additional vehicle types
+SO THAT I am able to comprehend and work with existing code bases.
 ```
 
 ## Acceptance Criteria
 
 ```md
-GIVEN a weather dashboard with form inputs
-
-WHEN I search for a city
-
-THEN I am presented with current and future conditions for that city, and that city is added to the search history
-
-WHEN I view current weather conditions for that city
-
-THEN I am presented with the city name, the date, an icon representation of weather conditions, a description of the weather for the icon's alt tag, the temperature, the humidity, and the wind speed
-
-WHEN I view future weather conditions for that city
-
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-
-WHEN I click on a city in the search history
-
-THEN I am again presented with current and future conditions for that city
+GIVEN a command-line application that accepts user input
+WHEN I am prompted to create a new vehicle or existing vehicle
+THEN I can choose between the two options
+WHEN I am prompted to choose the vehicle type during creation
+THEN I can choose between car, truck, and motorbike
+WHEN I am prompted for details about the vehicle
+THEN I can enter the vehicle information
+WHEN I have entered all the vehicle information
+THEN I can use the created vehicle
+WHEN I select an existing vehicle
+THEN I can use the selected existing vehicle
+WHEN I have created a new vehicle or selected an existing vehicle
+THEN I can perform actions with that vehicle
+WHEN I perform an action with a vehicle
+THEN I see the result of the action in the command-line
+WHEN I complete the process of performing an action
+THEN I can perform additional actions until I choose to exit
 ```
 
-## Mock-Up
+## Additional Requirements
 
-The following image shows the web application's appearance and functionality:
+This Challenge combines many of the skills covered so far. In addition to the user story and acceptance criteria, we've provided some guidelines to help you get started.
 
-![The weather app includes a search option, a list of cities, and a 5-day forecast and current weather conditions for Atlanta ](./Assets/09-servers-and-apis-homework-demo.png)
+Because this Challenge requires a video submission, refer to the [Full-Stack Blog video submission guide](https://coding-boot-camp.github.io/full-stack/computer-literacy/video-submission-guide) for guidance on creating and sharing a video.
 
-## Getting Started
+Your application should use [Inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user. The application will be invoked by using the following command:
 
-On the back end, the application should include a `searchHistory.json` file that will be used to store and retrieve cities using the `fs` module.
+```bash
+npm start
+```
 
-The following HTML route should be created:
+## 📝 Notes
 
-* `GET *` should return the `index.html` file.
+Moving forward, you will be provided with the `tsconfig.json` file. This is to reflect the fact that most companies assign you projects with these configurations already set up.
 
-The following API routes should be created:
+## Helpful TypeScript Resources
 
-* `GET /api/weather/history` should read the `searchHistory.json` file and return all saved cities as JSON.
+* [Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)
 
-* `POST /api/weather` should receive a city name to save on the request body, add it to the `searchHistory.json` file, and then return associated weather data to the client. You'll need to find a way to give each city name a unique id when it's saved (look into npm packages that could do this for you).
+* [Object types](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 
-Refer to the [Full-Stack Blog on deploying to Render](https://coding-boot-camp.github.io/full-stack/render/render-deployment-guide) and the [Render documentation on setting environment variables](https://docs.render.com/configure-environment-variables).
+* [Everyday types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
 
----
-
-## 💡 Hints
-
-* Using the 5-day weather forecast API, you'll notice that you'll need to pass in coordinates instead of just a city name. Using the OpenWeatherMap APIs, how could we retrieve geographical coordinates given a city name?
-
-* How could we make the OpenWeather API calls server-side, parse the data, and then send the parsed data client-side?
-
-## 🏆 Bonus
-
-This application offers the DELETE functionality on the front end. As a bonus, try to add the DELETE route to the application using the following guideline:
-
-* `DELETE /api/weather/history/:id` should receive a route parameter that contains the id of a city name to delete. To delete a city, you'll need to read all the cities from the `searchHistory.json` file, remove the city with the given `id` property, and then rewrite the cities to the `searchHistory.json` file.
-
----
+* [More on functions](https://www.typescriptlang.org/docs/handbook/2/functions.html)
 
 ## Grading Requirements
 
-> **Note** If a Challenge assignment submission is marked as “0”, it's considered incomplete and won't count toward your graduation requirements. Examples of incomplete submissions include the following:
+> **Note** If a Challenge assignment submission is marked as "0," it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include:
 >
-> * A repository that has no code.
+> * A repository that has no code
 >
-> * A repository that includes a unique name but nothing else.
+> * A repository that includes a unique name but nothing else
 >
-> * A repository that includes only a README file but nothing else.
+> * A repository that includes only a README file but nothing else
 >
-> * A repository that includes only starter code.
+> * A repository that only includes starter code
 
 This Challenge is graded based on the following criteria:
 
+### Deliverables: 20%
+
+* A walkthrough video that demonstrates the functionality of the Vehicle Builder.
+
+* Your GitHub repository containing your application code.
+
+### Walkthrough Video: 27%
+
+* The `README.md` file must include a link to the walkthrough video.
+
+* The walkthrough video must demonstrate how a user would invoke the application from the command line.
+
+* The walkthrough video must demonstrate how a user would enter responses to all of the prompts in the application.
+
+* The walkthrough video must demonstrate all the prompts and functionality related to trucks and motorbikes working properly.
+
 ### Technical Acceptance Criteria: 40%
 
-The Challenge satisfies all of the above acceptance criteria, plus the following:
+* Satisfies all of the preceding acceptance criteria plus the following:
 
-* Application uses the OpenWeather API to retrieve weather data.
+  * It uses the [Inquirer package](https://www.npmjs.com/package/inquirer).
 
-* Application back end must store cities that have a unique id in a JSON file.
+  * The application must have properly implemented `Truck` and `Motorbike` classes:
 
-* Application must be deployed to Render.
+    * The user should be able to choose between a car, a truck, or a motorbike when creating a vehicle.
 
-### Deployment: 32%
+    * The `Truck` and `Motorbike` classes must prompt the user for details that the `Car` class doesn't.
 
-The Challenge satisfies all of the above acceptance criteria, plus the following:
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-The Challenge satisfies all of the above acceptance criteria, plus the following:
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the Challenge instructions.
+    * The `Truck` class must allow the user to implement an action that the `Car` and `Motorbike` classes cannot.
 
 ### Repository Quality: 13%
-
-The Challenge satisfies all of the above acceptance criteria, plus the following:
 
 * Repository has a unique name.
 
@@ -148,21 +118,15 @@ The Challenge satisfies all of the above acceptance criteria, plus the following
 
 * Repository contains multiple descriptive commit messages.
 
-* Repository contains quality README file with description, screenshot, and link to deployed application.
-
-### Bonus: +10 Points
-
-Fulfilling the following can add up to 10 points to your grade. Note that the highest grade you can achieve is still 100:
-
-* Application allows users to delete cities.
+* Repository contains a high-quality readme with description and a link to a walkthrough video.
 
 ## Review
 
-You are required to submit BOTH of the following for review:
+You are required to submit the following for review:
 
-* The URL of the functional, deployed application.
+* A walkthrough video that demonstrates the functionality of the application.
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README file describing the project.
+* The URL of the GitHub repository, with a unique name and a README describing the project.
 
 ---
-© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+&copy; 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
