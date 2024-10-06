@@ -183,6 +183,7 @@ class Cli {
           parseInt(answers.year),
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
+          [new Wheel(), new Wheel(), new Wheel(), new Wheel()], // added this here, I was missing this as it was in the truck constructor
           parseInt(answers.towingCapacity)
         );
         // TODO: Use the answers object to pass the required properties to the Truck constructor
