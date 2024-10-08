@@ -59,11 +59,11 @@ class Cli {
   createVehicle(): void {
     inquirer
       .prompt([
-        { 
+        {
           type: 'list',
           name: 'vehicleType',
           message: 'Select vehicle type',
-          choices: ['Car', 'Truck', 'Motorbike'] 
+          choices: ['Car', 'Truck', 'Motorbike']
         },
       ])
       .then((answers) => {
@@ -261,8 +261,8 @@ class Cli {
           parseInt(answers.weight),
           parseInt(answers.topSpeed),
           [
-          new Wheel(parseInt(answers.frontWheelDiameter), answers.frontWheelBrand),
-          new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand),
+            new Wheel(parseInt(answers.frontWheelDiameter), answers.frontWheelBrand),
+            new Wheel(parseInt(answers.rearWheelDiameter), answers.rearWheelBrand),
           ]
         );
 
