@@ -31,7 +31,7 @@ npm start
 Follow the prompts to create or select a vehicle, and through until you can drive and operate the vehicle of your choice. You will also be able to select 'Print Details' to see what actions you have taken.
 
 ### Demo Video
-[![Watch the demo video](./assets/img/vehicle-builder-thumbnail-B.jpg)](https://drive.google.com/file/d/1A-IyRkEEb6Y9wiSuCS1xYys23jSVsze_/view?usp=sharing)
+[![Watch the demo video](./assets/img/vehicle-builder-thumbnail-B.jpg)](https://drive.google.com/file/d/1vJJbvOJAVO74Bf2owocwQv3UBfZ7P8wu/view?usp=sharing)
 
 This demo shows the program's features, including creating the vehicle and operating, as well as exiting the application. 
 

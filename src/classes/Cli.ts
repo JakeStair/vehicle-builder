@@ -413,10 +413,6 @@ getAvailableActions(): string[] {
   return actions;
 }
 
-
-
-
-
   // method to start the cli
   startCli(): void {
     inquirer
