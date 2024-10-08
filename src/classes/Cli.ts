@@ -307,86 +307,114 @@ class Cli {
 
 
   // method to perform actions on a vehicle
-  performActions(): void {
-    inquirer
-      .prompt([
-        {
-          type: 'list',
-          name: 'action',
-          message: 'Select an action',
-          choices: [
-            'Print details',
-            'Start vehicle',
-            'Accelerate 5 MPH',
-            'Decelerate 5 MPH',
-            'Stop vehicle',
-            'Turn right',
-            'Turn left',
-            'Reverse',
-            'Tow vehicle',
-            'Perform wheelie',
-            'Select or create another vehicle',
-            'Exit',
-          ],
-        },
-      ])
-      .then((answers) => {
-        // Find the selected vehicle
-        let selectedVehicle;
-        for (let i = 0; i < this.vehicles.length; i++) {
-          if (this.vehicles[i].vin === this.selectedVehicleVin) {
-            selectedVehicle = this.vehicles[i];
-            break; // Exit the loop once the vehicle is found
-          }
-        }
+  // method to perform actions on a vehicle
+performActions(): void {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'action',
+        message: 'Select an action',
+        choices: this.getAvailableActions(),
+      },
+    ])
+    .then((answers: { action: string }) => {
+      // Find the selected vehicle
+      const selectedVehicle = this.vehicles.find(vehicle => vehicle.vin === this.selectedVehicleVin);
 
-        if (selectedVehicle) {
-          // Perform the selected action based on user input
-          if (answers.action === 'Print details') {
+      if (selectedVehicle) {
+        // Perform the selected action based on user input
+        switch (answers.action) {
+          case 'Print details':
             selectedVehicle.printDetails();
-          } else if (answers.action === 'Start vehicle') {
+            break;
+          case 'Start vehicle':
             selectedVehicle.start();
-          } else if (answers.action === 'Accelerate 5 MPH') {
+            break;
+          case 'Accelerate 5 MPH':
             selectedVehicle.accelerate(5);
-          } else if (answers.action === 'Decelerate 5 MPH') {
+            break;
+          case 'Decelerate 5 MPH':
             selectedVehicle.decelerate(5);
-          } else if (answers.action === 'Stop vehicle') {
+            break;
+          case 'Stop vehicle':
             selectedVehicle.stop();
-          } else if (answers.action === 'Turn right') {
+            break;
+          case 'Turn right':
             selectedVehicle.turn('right');
-          } else if (answers.action === 'Turn left') {
+            break;
+          case 'Turn left':
             selectedVehicle.turn('left');
-          } else if (answers.action === 'Reverse') {
+            break;
+          case 'Reverse':
             selectedVehicle.reverse();
-          } else if (answers.action === 'Tow vehicle') {
+            break;
+          case 'Tow vehicle':
             if (selectedVehicle instanceof Truck) {
               this.findVehicleToTow(selectedVehicle);
               return; // Prevent calling performActions immediately after towing
             } else {
               console.log('Only trucks can tow vehicles.');
             }
-          } else if (answers.action === 'Perform wheelie') {
+            break;
+          case 'Perform wheelie':
             if (selectedVehicle instanceof Motorbike) {
               selectedVehicle.wheelie();
-              // ⤴️the problem here was that the wheelie method was being called performWheelie, and was sending errors
             } else {
               console.log('Only motorbikes can perform a wheelie.');
             }
-          } else if (answers.action === 'Select or create another vehicle') {
+            break;
+          case 'Select or create another vehicle':
             this.startCli();
             return;
-          } else {
+          default:
             this.exit = true;
-          }
-        } else {
-          console.log('Selected vehicle not found.');
+            break;
         }
+      } else {
+        console.log('Selected vehicle not found.');
+      }
 
-        if (!this.exit) {
-          this.performActions();
-        }
-      });
+      if (!this.exit) {
+        this.performActions();
+      }
+    });
+}
+
+// Helper method to get available actions based on the selected vehicle type
+// Helper method to get available actions based on the selected vehicle type
+// Helper method to get available actions based on the selected vehicle type
+getAvailableActions(): string[] {
+  const actions: string[] = [
+    'Print details',
+    'Start vehicle',
+    'Accelerate 5 MPH',
+    'Decelerate 5 MPH',
+    'Stop vehicle',
+    'Turn right',
+    'Turn left',
+    'Reverse',
+    'Select or create another vehicle',
+    'Exit',
+  ];
+
+  // Find the selected vehicle
+  const selectedVehicle = this.vehicles.find(vehicle => vehicle.vin === this.selectedVehicleVin);
+
+  // Check the type of the selected vehicle
+  if (selectedVehicle instanceof Truck) {
+    actions.splice(actions.length - 3, 0, 'Tow vehicle'); // Insert Tow vehicle before Select or create another vehicle
   }
+
+  if (selectedVehicle instanceof Motorbike) {
+    actions.splice(actions.length - 3, 0, 'Perform wheelie'); // Insert Perform wheelie before Select or create another vehicle
+  }
+
+  return actions;
+}
+
+
+
 
 
   // method to start the cli
